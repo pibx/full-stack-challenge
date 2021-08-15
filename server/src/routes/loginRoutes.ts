@@ -5,14 +5,30 @@ import * as path from "path";
 import * as csv from "fast-csv";
 
 const dir = "./";
-const parse = require("node-csv");
+
 const router = Router();
 
-fs.createReadStream(path.resolve(dir, "redfin_2021-08-12-13-57-17.csv"))
-  .pipe(csv.parse({ headers: true }))
-  .on("error", (error) => console.error(error))
-  .on("data", (row) => console.log(row))
-  .on("end", (rowCount: number) => console.log(`Parsed ${rowCount} rows`));
+router.get("/Listings", (req: Request, res: Response) => {
+  let listingArray: any[] = [];
+
+  fs.createReadStream(path.resolve(dir, "redfin_2021-08-12-13-57-17.csv"))
+    .pipe(csv.parse({ headers: true }))
+    .on("error", (error) => console.error(error))
+    .on("data", (row: any) => listingArray.push(row))
+    .on("end", (rowCount: number) => {
+      console.log(rowCount);
+      res.status(201).send({
+        status: "success",
+        listingArray,
+      });
+    });
+  // .on("end", (rowCount: number) => console.log(`Parsed ${rowCount} rows`));
+  // console.log(listingArray, "listing array");
+  // // return response
+  // return res.status(200).json({
+  //   message: listingArray,
+  // });
+});
 
 router.get("/login", (req: Request, res: Response) => {
   res.send(

@@ -25,14 +25,28 @@ var fs = __importStar(require("fs"));
 var path = __importStar(require("path"));
 var csv = __importStar(require("fast-csv"));
 var dir = "./";
-var parse = require("node-csv");
 var router = express_1.Router();
 exports.router = router;
-fs.createReadStream(path.resolve(dir, "redfin_2021-08-12-13-57-17.csv"))
-    .pipe(csv.parse({ headers: true }))
-    .on("error", function (error) { return console.error(error); })
-    .on("data", function (row) { return console.log(row); })
-    .on("end", function (rowCount) { return console.log("Parsed " + rowCount + " rows"); });
+router.get("/Listings", function (req, res) {
+    var listingArray = [];
+    fs.createReadStream(path.resolve(dir, "redfin_2021-08-12-13-57-17.csv"))
+        .pipe(csv.parse({ headers: true }))
+        .on("error", function (error) { return console.error(error); })
+        .on("data", function (row) { return listingArray.push(row); })
+        .on("end", function (rowCount) {
+        console.log(rowCount);
+        res.status(201).send({
+            status: "success",
+            listingArray: listingArray,
+        });
+    });
+    // .on("end", (rowCount: number) => console.log(`Parsed ${rowCount} rows`));
+    // console.log(listingArray, "listing array");
+    // // return response
+    // return res.status(200).json({
+    //   message: listingArray,
+    // });
+});
 router.get("/login", function (req, res) {
     res.send("\n    <form method=\"POST\">\n    <div>\n        <label> Email </label>\n\n        <input name=\"email\"/>\n    </div>\n\n    <div>\n        <label> Password </label>\n\n        <input name=\"password\" type=\"password\" />\n    </div>\n\n<button>Submit</button>\n    </form>\n    ");
 });
