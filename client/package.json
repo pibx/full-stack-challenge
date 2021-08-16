@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/free-brands-svg-icons": "^5.15.4",
+    "@fortawesome/free-regular-svg-icons": "^5.15.4",
     "@full-stack-challenge/common": "../common",
     "fp-ts": "^2.11.1",
     "io-ts": "^2.2.16",

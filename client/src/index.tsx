@@ -1,4 +1,4 @@
 import ReactDOM from 'react-dom'
-import { ListingSearchViewport } from './components/ListingSearch'
+import { ListingSearch } from './components/ListingSearch'
 
-ReactDOM.render(<ListingSearchViewport />, document.querySelector('#root'))
+ReactDOM.render(<ListingSearch />, document.querySelector('#root'))

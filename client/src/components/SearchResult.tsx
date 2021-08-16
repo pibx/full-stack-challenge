@@ -1,8 +1,13 @@
 import React from 'react'
-
+//MouseEvent, useState
 import { Listing } from '@full-stack-challenge/common'
 
-import { StyleMap } from './styles'
+import cardStyles from './Card.module.css'
+import styles from './SearchResult.module.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTag } from '@fortawesome/free-solid-svg-icons'
+
+const tag = <FontAwesomeIcon icon={faTag} />
 
 type SearchResultProps = {
   result: Listing
@@ -42,27 +47,44 @@ type SearchResultProps = {
     })
 */
 
-export const SearchResult: React.FC<SearchResultProps> = ({ result }) => {
-  return (
-    <div style={styles.card}>
-      <a href={result.url}>
-        <div>
-          <div>municipality: {result.municipality}</div>
-          <div>region: {result.region}</div>
-          <div>postalCode: {result.postalCode}</div>
-          <div>price: {result.price}</div>
-          <div>address: {result.address || 'Not given'}</div>
-        </div>
-      </a>
-    </div>
-  )
-}
+// function changeBackground(e: MouseEvent<HTMLButtonElement>) {
+//   e.preventDefault
+//   // e.target.card.background = 'red'
+//   console.log('test')
+// }
 
-const styles: StyleMap = {
-  card: {
-    border: '1px solid black',
-    borderRadius: 4,
-    padding: '1em 0.5em'
-  }
-  // ... other stuff
+export const SearchResult: React.FC<SearchResultProps> = ({ result }) => {
+  // const [value, setValue] = useState(0)
+  console.log(result)
+
+  // newElement = <div className={styles.newListed}> Newly Listed!</div>
+
+  return (
+    <a style={{ textDecoration: 'none' }} href={result.url}>
+      <div className={`${styles.card} ${cardStyles.card}`}>
+        {result.daysOnMarket == 1 && (
+          <div className={styles.newListed}> Newly Listed! {tag}</div>
+        )}
+
+        <div className={styles.rowContainer}>
+          <div className={styles.addressContainer}>
+            <div className={styles.text}>
+              address:
+              {result.address || 'Not given'}
+            </div>
+            <div className={styles.text}>
+              municipality: {result.municipality}
+            </div>
+            <div className={styles.text}>region: {result.region}</div>
+            <div className={styles.text}>postalCode: {result.postalCode}</div>
+          </div>
+          <div className={styles.priceContainer}>
+            <div className={styles.priceText}>Price: {result.price}</div>
+          </div>
+        </div>
+
+        {/* end of card container */}
+      </div>
+    </a>
+  )
 }

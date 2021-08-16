@@ -1,0 +1,27 @@
+.layout {
+  font-size: 10px;
+  margin: 5em;
+  background-color: #d4f1f4;
+}
+
+@media screen and (min-width: 640px) {
+  .layout {
+    font-size: 11px;
+    margin: 5em;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .layout {
+    font-size: 12px;
+    margin: 5em;
+  }
+}
+
+.error-message {
+  /* a red card with /!\ icon */
+}
+
+.placeholder {
+  /* an info card with (i) icon */
+}

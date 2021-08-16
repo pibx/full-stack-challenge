@@ -1,0 +1,22 @@
+.form {
+  border: 1px solid black;
+  display: flex;
+}
+.input {
+  flex: 1;
+  background: none;
+  border: none;
+  /* height: 3em; */
+  padding: 1em;
+  font-size: 1.5em;
+  border-color: rgb(0, 201, 134);
+}
+
+.button {
+  background: none;
+  border: none;
+}
+.icon {
+  width: 1em;
+  height: 1em;
+}

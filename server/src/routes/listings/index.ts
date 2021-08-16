@@ -11,30 +11,33 @@ interface ListingsParams {
 
 router.get(
   '/listings',
-  async (req: Request<{}, {}, {}, ListingsParams>, res: Response) => {
-    const { searchStr } = req.query
-    if (searchStr) {
-      try {
-        const allResults = await parse()
-        const filteredResults = filter(allResults, searchStr)
+  (req: Request<{}, {}, {}, ListingsParams>, res: Response) => {
+    setTimeout(async () => {
+      const { searchStr } = req.query
+      if (searchStr) {
+        try {
+          const allResults = await parse()
+          const filteredResults = filter(allResults, searchStr)
 
-        res.status(201).send({
-          status: 'success',
-          data: filteredResults
-        })
-      } catch (error) {
-        res.status(500).send({
+          res.status(201).send({
+            status: 'success',
+            data: filteredResults
+          })
+        } catch (error) {
+          res.status(500).send({
+            status: 'error',
+            error: error.message
+          })
+        }
+      } else {
+        res.status(400).send({
           status: 'error',
-          error: error.message
+          error:
+            'Invalid request. No value was sent for the required query parameter `searchStr`.'
         })
       }
-    } else {
-      res.status(400).send({
-        status: 'error',
-        error:
-          'Invalid request. No value was sent for the required query parameter `searchStr`.'
-      })
-    }
+      // make it show the loading indicator briefly
+    }, 200)
   }
 )
 

@@ -9,20 +9,24 @@ export const filter = (allResults: Listing[], searchStr: string) =>
       includesExactMatch(exactMatchProps(listing), searchStr)
   )
 
+type PartialMatchProps =
+  | 'propertyType'
+  | 'address'
+  | 'municipality'
+  | 'neighborhood'
+const partialMatchPropKeys: PartialMatchProps[] = [
+  'propertyType',
+  'address',
+  'municipality',
+  'neighborhood'
+]
 const partialMatchProps = (listing: Listing) =>
-  pick(
-    listing,
-    'propertyType',
-    'address',
-    'municipality',
-    'neighborhood'
-  ) as Pick<
-    Listing,
-    'propertyType' | 'address' | 'municipality' | 'neighborhood'
-  >
+  pick(listing, ...partialMatchPropKeys) as Pick<Listing, PartialMatchProps>
 
+type ExactMatchProps = 'region' | 'mls'
+const exactMatchPropKeys: ExactMatchProps[] = ['region', 'mls']
 const exactMatchProps = (listing: Listing) =>
-  pick(listing, 'region', 'mls') as Pick<Listing, 'region' | 'mls'>
+  pick(listing, exactMatchPropKeys) as Pick<Listing, ExactMatchProps>
 
 const includesPartialMatch = (
   searchedProps: Record<string, string>,

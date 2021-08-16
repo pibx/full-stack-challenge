@@ -6,22 +6,17 @@ import { ListingsClient } from '../client/ListingsClient'
 
 import { SearchBar } from './SearchBar'
 import { SearchResult } from './SearchResult'
-import { ViewportProvider, useViewport, Viewport } from './ViewportContext'
-import { StyleMap } from './styles'
 
-export const ListingSearchViewport: React.FC = () => {
-  return (
-    <ViewportProvider>
-      <ListingSearch />
-    </ViewportProvider>
-  )
-}
+import cardStyles from './Card.module.css'
+import styles from './ListingSearch.module.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
 
+const coffeIcon = <FontAwesomeIcon icon={faInfoCircle} />
 // would be better to get this from environment config
 const API_PATH = 'http://localhost:3000'
 export const ListingSearch: React.FC = () => {
   const listingsClient = React.useRef(new ListingsClient(API_PATH))
-  const viewport = useViewport()
   const [results, setResults] = React.useState<undefined | Listing[] | Error>(
     undefined
   )
@@ -33,35 +28,26 @@ export const ListingSearch: React.FC = () => {
     }
   }
   return (
-    <main style={styles(viewport)}>
+    <main className={styles.layout}>
       <SearchBar onSearch={onSearch} />
       {results ? (
         Array.isArray(results) ? (
           results.map(result => <SearchResult result={result} />)
         ) : (
-          <div style={styles(viewport).errorMessage}>{results.message}</div>
+          <div className={`${styles.errorMessage} ${cardStyles.card}`}>
+            {results.message}
+          </div>
         )
       ) : (
-        <div style={styles(viewport).loadingPlaceholder} />
+        <div className={`${styles.placeholder} ${cardStyles.card}`}>
+          {coffeIcon}Try searching with a partial match on Property Type,
+          Address, City, or Neighborhood.
+          <br />
+          You can also use an exact match on an MLS ID or a two-letter State
+          code (such as CA).
+          <i className="fa fa-info-circle" aria-hidden="true"></i>
+        </div>
       )}
     </main>
   )
 }
-
-const FONT_SIZE_MOBILE = 12
-const FONT_SIZE_SMALLSCREEN = 12
-const FONT_SIZE_LARGESCREEN = 12
-const styles = (viewport: Viewport): StyleMap => ({
-  main: {
-    fontSize:
-      viewport.width < 640
-        ? FONT_SIZE_MOBILE
-        : viewport.width < 1024
-        ? FONT_SIZE_SMALLSCREEN
-        : FONT_SIZE_LARGESCREEN
-  },
-
-  errorMessage: {},
-
-  loadingPlaceholder: {}
-})
