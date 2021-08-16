@@ -1,8 +1,7 @@
-import { FetchTodosAction, DeleteTodoAction } from "./todos";
+import { FetchListingsAction } from "./listings";
 
 export enum ActionTypes {
-  fetchTodos,
-  deleteTodo,
+  fetchMlsListings,
 }
 
-export type Action = FetchTodosAction | DeleteTodoAction;
+export type Action = FetchListingsAction;

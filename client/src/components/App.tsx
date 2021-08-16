@@ -1,14 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Todo, fetchTodos, deleteTodo } from "../actions";
+import { Listing, fetchMlsListings } from "../actions";
 import { StoreState } from "../reducers";
 
 // import { todosReducer } from "../reducers/todos";
 
 interface AppProps {
-  todos: Todo[];
-  fetchTodos(): any;
-  deleteTodo: typeof deleteTodo;
+  listings: Listing[];
+  fetchMlsListings(): any;
 }
 
 interface AppState {
@@ -18,36 +17,25 @@ interface AppState {
 class _App extends React.Component<AppProps, AppState> {
   state = { fetching: false };
 
-  componentDidUpdate(prevProps: AppProps): void {
-    if (!prevProps.todos.length && this.props.todos.length) {
-      this.setState({ fetching: false });
-    }
-    // this.props.fetchTodos();
-  }
-
   onButtonClick = (): void => {
-    setTimeout(this.props.fetchTodos());
+    setTimeout(this.props.fetchMlsListings());
     this.setState({ fetching: true });
   };
 
-  onTodoClick = (id: number): void => {
-    this.props.deleteTodo(id);
-  };
-
   renderList(): JSX.Element[] {
-    return this.props.todos.map((todo: Todo) => {
+    return this.props.listings.map((listing: Listing, index) => {
       return (
-        <div onClick={() => this.onTodoClick(todo.id)} key={todo.id}>
+        <div key={index}>
           {" "}
           {this.state.fetching ? console.log("loading...") : null}
-          {todo.title}
+          {listing}
         </div>
       );
     });
   }
 
   render() {
-    console.log(this.props.todos);
+    console.log(this.props.listings);
     return (
       <div>
         <button onClick={this.onButtonClick}>Fetch</button>
@@ -57,8 +45,8 @@ class _App extends React.Component<AppProps, AppState> {
   }
 }
 
-const mapStateToProps = ({ todos }: StoreState): { todos: Todo[] } => {
-  return { todos };
+const mapStateToProps = ({ listings }: StoreState): { listings: Listing[] } => {
+  return { listings };
 };
 
-export const App = connect(mapStateToProps, { fetchTodos, deleteTodo })(_App);
+export const App = connect(mapStateToProps, { fetchMlsListings })(_App);
