@@ -1,17 +1,13 @@
-import express, { Request, Response } from "express";
-import { router } from "./routes/loginRoutes";
-import cookieSession from "cookie-session";
+import express from 'express'
+import cors from 'cors'
+import { router } from './routes/listings'
 
-// import bodyParser from "body-parser";
+const app = express()
+app.use(cors())
+app.use(express.urlencoded({ extended: true }))
 
-const app = express();
-// app.use(bodyParser.urlencoded({
-//     extended: true
-//   }));
-app.use(express.urlencoded({ extended: true }));
-app.use(cookieSession({ keys: ["fdsfds"] }));
-app.use(router);
+app.use(router)
 
 app.listen(3000, () => {
-  console.log("Listening on port 3000");
-});
+  console.log('Listening on port 3000')
+})
