@@ -6,11 +6,11 @@ import cardStyles from './Card.module.css'
 import styles from './SearchResult.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTag } from '@fortawesome/free-solid-svg-icons'
-import { useSpring, animated as a } from 'react-spring'
 const tag = <FontAwesomeIcon icon={faTag} />
 
 type SearchResultProps = {
   result: Listing
+  cardStyle?: React.CSSProperties
 }
 
 /*
@@ -53,98 +53,94 @@ type SearchResultProps = {
 //   console.log('test')
 // }
 
-export const SearchResult: React.FC<SearchResultProps> = ({ result }) => {
-  const contentProps = useSpring({
-    from: { y: 9999 },
-    to: { y: 0 },
-    delay: 100
-  })
+export const SearchResult: React.FC<SearchResultProps> = ({
+  result,
+  cardStyle = {}
+}) => {
   return (
-    <a.div style={contentProps}>
-      <a style={{ textDecoration: 'none' }} href={result.url}>
-        <div className={`${styles.card} ${cardStyles.card}`}>
-          {result.daysOnMarket === 1 && (
-            <div className={styles.newListed}>
-              <div>{tag}</div>
-              <div> &nbsp;&nbsp; Newly Listed!</div>
-            </div>
-          )}
+    <a className={styles.wrapperLink} href={result.url}>
+      <div className={`${styles.card} ${cardStyles.card}`} style={cardStyle}>
+        {result.daysOnMarket === 1 && (
+          <div className={styles.newListed}>
+            <div>{tag}</div>
+            <div> &nbsp;&nbsp; Newly Listed!</div>
+          </div>
+        )}
 
-          <div className={styles.rowContainer}>
-            <div className={styles.addressContainer}>
-              <div className={styles.textTitle}>Location</div>
+        <div className={styles.rowContainer}>
+          <div className={styles.addressContainer}>
+            <div className={styles.textTitle}>Location</div>
 
-              <div className={styles.rowContainer}>
-                <div className={styles.textBold}>Address:</div>
-                <div className={styles.text}>
-                  {result.address || 'Not Available'}
-                </div>
-              </div>
-              <div className={styles.rowContainer}>
-                <div className={styles.textBold}>Municipality:</div>
-                <div className={styles.text}>
-                  {result.municipality || 'Not Available'}
-                </div>
-              </div>
-              <div className={styles.rowContainer}>
-                <div className={styles.textBold}>Region:</div>
-                <div className={styles.text}>
-                  {result.region || 'Not Available'}
-                </div>
-              </div>
-              <div className={styles.rowContainer}>
-                <div className={styles.textBold}>PostalCode:</div>
-                <div className={styles.text}>
-                  {result.postalCode || 'Not Available'}
-                </div>
+            <div className={styles.rowContainer}>
+              <div className={styles.textBold}>Address:</div>
+              <div className={styles.text}>
+                {result.address || 'Not Available'}
               </div>
             </div>
-
-            {/* ---------------------------------- */}
-            <div className={styles.amenitiesContainer}>
-              <div className={styles.textTitle}>Listing Details</div>
-
-              <div className={styles.rowContainer}>
-                <div className={styles.textBold}>HOA:</div>
-                <div className={styles.text}>
-                  ${result.hoaMonthlyFee || 'None'}
-                </div>
-              </div>
-              <div className={styles.rowContainer}>
-                <div className={styles.textBold}>Open House:</div>
-                <div className={styles.text}>
-                  {result.nextOpenHouseStartTime || 'Not Available'}
-                </div>
-              </div>
-              <div className={styles.rowContainer}>
-                <div className={styles.textBold}>Beds:</div>
-                <div className={styles.text}>{result.beds || 'None'}</div>
-              </div>
-              <div className={styles.rowContainer}>
-                <div className={styles.textBold}>Baths:</div>
-                <div className={styles.text}>{result.baths || 'None'}</div>
+            <div className={styles.rowContainer}>
+              <div className={styles.textBold}>Municipality:</div>
+              <div className={styles.text}>
+                {result.municipality || 'Not Available'}
               </div>
             </div>
-            <div className={styles.priceContainer}>
-              <div className={styles.textTitle}>Pricing</div>
-              <div className={styles.rowContainer}>
-                <div className={styles.textBold}>Current Price:</div>
-                <div className={styles.text}>
-                  {`$${result.price}` || 'Not Available'}
-                </div>
+            <div className={styles.rowContainer}>
+              <div className={styles.textBold}>Region:</div>
+              <div className={styles.text}>
+                {result.region || 'Not Available'}
               </div>
-              <div className={styles.rowContainer}>
-                <div className={styles.textBold}>Price Per Square Feet:</div>
-                <div className={styles.text}>
-                  {`$${result.pricePerSquareFoot}` || 'None'}
-                </div>
+            </div>
+            <div className={styles.rowContainer}>
+              <div className={styles.textBold}>PostalCode:</div>
+              <div className={styles.text}>
+                {result.postalCode || 'Not Available'}
               </div>
             </div>
           </div>
 
-          {/* end of card container */}
+          {/* ---------------------------------- */}
+          <div className={styles.amenitiesContainer}>
+            <div className={styles.textTitle}>Listing Details</div>
+
+            <div className={styles.rowContainer}>
+              <div className={styles.textBold}>HOA:</div>
+              <div className={styles.text}>
+                ${result.hoaMonthlyFee || 'None'}
+              </div>
+            </div>
+            <div className={styles.rowContainer}>
+              <div className={styles.textBold}>Open House:</div>
+              <div className={styles.text}>
+                {result.nextOpenHouseStartTime || 'Not Available'}
+              </div>
+            </div>
+            <div className={styles.rowContainer}>
+              <div className={styles.textBold}>Beds:</div>
+              <div className={styles.text}>{result.beds || 'None'}</div>
+            </div>
+            <div className={styles.rowContainer}>
+              <div className={styles.textBold}>Baths:</div>
+              <div className={styles.text}>{result.baths || 'None'}</div>
+            </div>
+          </div>
+          <div className={styles.priceContainer}>
+            <div className={styles.textTitle}>Pricing</div>
+            <div className={styles.rowContainer}>
+              <div className={styles.textBold}>Current Price:</div>
+              <div className={styles.text}>
+                {`$${result.price}` || 'Not Available'}
+              </div>
+            </div>
+            <div className={styles.rowContainer}>
+              <div className={styles.textBold}>Price Per Square Feet:</div>
+              <div className={styles.text}>
+                {`$${result.pricePerSquareFoot}` || 'None'}
+              </div>
+            </div>
+          </div>
         </div>
-      </a>
-    </a.div>
+
+        {/* end of card container */}
+      </div>
+    </a>
   )
 }

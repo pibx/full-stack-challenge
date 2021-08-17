@@ -1,5 +1,8 @@
 import React from 'react'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+
 import styles from './SearchBar.module.css'
 import { ReactComponent as SearchIcon } from './search_house.svg'
 
@@ -18,11 +21,9 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   }
   const doSearch = async () => {
     const input = new FormData(formEl.current!).get(SEARCH_INPUT_NAME) as string
-    if (input.length >= 2) {
-      setLoading(true)
-      await onSearch(input)
-      setLoading(false)
-    }
+    setLoading(true)
+    await onSearch(input)
+    setLoading(false)
   }
 
   return (
@@ -35,7 +36,11 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
         onInput={doSearch}
       />
       <button type="submit" className={styles.button}>
-        {loading ? '...' : <SearchIcon className={styles.icon} />}
+        {loading ? (
+          <FontAwesomeIcon icon={faSpinner} spin size="2x" color="white" />
+        ) : (
+          <SearchIcon className={styles.icon} />
+        )}
       </button>
     </form>
   )

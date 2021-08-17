@@ -1,8 +1,13 @@
 .layout {
   font-size: 10px;
   margin: 5em;
-  background-color: #c3d8da;
   font-family: Roboto;
+  position: relative;
+  --color-primary: #1abc9c;
+  --color-dark: #2c3e50;
+  --color-info: #3498db;
+  --color-warning: #e74c3c;
+  --color-focus-ring: rgba(52, 152, 219, 0.5);
 }
 
 @media screen and (min-width: 640px) {
@@ -19,26 +24,41 @@
   }
 }
 
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .error-message {
-  /* a red card with /!\ icon */
+  color: var(--color-warning);
+  margin-top: 20px;
+  animation: fadeInUp 500ms;
 }
 
 .placeholder {
-  /* an info card with (i) icon */
+  color: var(--color-info);
+  margin-top: 20px;
+  animation: fadeInUp 500ms;
 }
 
 .rowContainer {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  color: #189ab4;
+  color: var(--color-dark);
 }
 
 .textDescription {
   margin-left: 5px;
   font-size: 1.5em;
   font-family: Roboto;
-  color: #189ab4;
+  color: var(--color-dark);
 }
 
 .infoIcon {
