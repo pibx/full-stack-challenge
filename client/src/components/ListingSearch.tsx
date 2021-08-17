@@ -12,6 +12,7 @@ import styles from './ListingSearch.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
+
 const infoIcon = <FontAwesomeIcon icon={faInfoCircle} />
 const warningIcon = <FontAwesomeIcon icon={faExclamationTriangle} />
 // would be better to get this from environment config
@@ -21,6 +22,7 @@ export const ListingSearch: React.FC = () => {
   const [results, setResults] = React.useState<undefined | Listing[] | Error>(
     undefined
   )
+
   const onSearch = async (searchStr: string) => {
     try {
       setResults(await listingsClient.current.get({ searchStr }))
