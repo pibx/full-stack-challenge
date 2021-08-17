@@ -1,7 +1,8 @@
 .layout {
   font-size: 10px;
   margin: 5em;
-  background-color: #d4f1f4;
+  background-color: #c3d8da;
+  font-family: Roboto;
 }
 
 @media screen and (min-width: 640px) {
@@ -24,4 +25,22 @@
 
 .placeholder {
   /* an info card with (i) icon */
+}
+
+.rowContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  color: #189ab4;
+}
+
+.textDescription {
+  margin-left: 5px;
+  font-size: 1.5em;
+  font-family: Roboto;
+  color: #189ab4;
+}
+
+.infoIcon {
+  margin-top: 4px;
 }
