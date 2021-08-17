@@ -1,0 +1,13 @@
+{
+  "name": "full-stack-challenge",
+  "version": "1.0.0",
+  "description": "HomeFinder interview project",
+  "scripts": {
+    "prepare": "concurrently --names='client:install,common:install,server:install' 'cd client && npm i' 'cd common && npm i' 'cd server && npm i'",
+    "start": "cd common && npm run build && cd .. && concurrently --kill-others --names='client,server' 'cd client && npm start' 'cd server && npm start'"
+  },
+  "devDependencies": {
+    "concurrently": "^6.2.1",
+    "typescript": "^4.3.5"
+  }
+}

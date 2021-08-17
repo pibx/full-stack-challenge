@@ -6,30 +6,21 @@ input to search and see results from that search. The backend which contains one
 endpoint that filters the homes from the search query and returns matching homes
 from the csv file provided.
 
-## Installation
-
-Clone The Repository
+## Running the project
 
 Open the terminal
 
 ```
+git clone [this repository, using your preferred method]
 cd full-stack-challenge
-cd server
 npm i
+npm start
 ```
 
-Create another terminal in the full-stack-challenge directory
+The browser should open by itself, but if not, proceed to http://localhost:3006/
+in your browser to search home listings.
 
-```
-cd client
-npm i
-```
-
-#In both terminals run npm start
-
-#Then proceede to http://localhost:3006/ in your browser to search your listings
-
-## Tech
+## Technologies
 
 - [React] - Front-end JavaScript library for building user interfaces or UI
   components!
