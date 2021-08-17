@@ -16,14 +16,11 @@ import { SearchResult } from './SearchResult'
 import cardStyles from './Card.module.css'
 import styles from './ListingSearch.module.css'
 
-const infoIcon = <FontAwesomeIcon icon={faInfoCircle} />
-const warningIcon = <FontAwesomeIcon icon={faExclamationTriangle} />
-
 // would be better to get this from environment config
 const API_PATH = 'http://localhost:3000'
 
-const rowHeight = 130
-const rowMargin = 40
+const rowHeight = 170
+const rowMargin = 10
 
 type ListingSearchResultsState = undefined | Listing[] | Error
 
@@ -49,28 +46,35 @@ export const ListingSearch: React.FC = () => {
 
   return (
     <div className={styles.layout}>
-      <SearchBar onSearch={onSearch} />
-      {transitions(
-        (style, result) =>
-          result && (
-            <a.div
-              style={{
-                marginTop: rowMargin / 2,
-                width: '100%',
-                position: 'absolute',
-                ...style
-              }}
-            >
-              <SearchResult
-                key={result.mls!}
-                result={result}
-                cardStyle={{
-                  height: rowHeight
+      <SearchBar onSearch={onSearch} className={styles.searchBar} />
+      <div
+        style={{
+          height: Array.isArray(results)
+            ? results.length * (rowHeight + rowMargin) + rowMargin
+            : undefined
+        }}
+      >
+        {transitions(
+          (style, result) =>
+            result && (
+              <a.div
+                style={{
+                  width: '100%',
+                  position: 'absolute',
+                  ...style
                 }}
-              />
-            </a.div>
-          )
-      )}
+              >
+                <SearchResult
+                  key={result.mls!}
+                  result={result}
+                  cardStyle={{
+                    height: rowHeight
+                  }}
+                />
+              </a.div>
+            )
+        )}
+      </div>
       {Array.isArray(results) ? (
         results.length === 0 && (
           <div
@@ -79,11 +83,14 @@ export const ListingSearch: React.FC = () => {
           >
             <div className={styles.rowContainer}>
               <div className={styles.textDescription}>
-                <div className={styles.rowContainer}>
-                  {warningIcon} &nbsp;&nbsp; No records Found&nbsp;&nbsp;{' '}
-                  {warningIcon}
+                <div
+                  className={`${styles.rowContainer} ${styles.warningIcon}`}
+                  style={{ marginTop: '-0.5em' }}
+                >
+                  <FontAwesomeIcon icon={faExclamationTriangle} />
+                  &nbsp;&nbsp;No records Found&nbsp;&nbsp;
+                  <FontAwesomeIcon icon={faExclamationTriangle} />
                 </div>
-                <br />
                 Try searching with a partial match on Property Type, Address,
                 City, or Neighborhood.
                 <br />
@@ -98,6 +105,9 @@ export const ListingSearch: React.FC = () => {
           key="errormessage"
           className={`${styles.errorMessage} ${cardStyles.card}`}
         >
+          <div className={styles.warningIcon}>
+            <FontAwesomeIcon icon={faExclamationTriangle} size="2x" />
+          </div>
           {results.message}
         </div>
       ) : (
@@ -106,7 +116,9 @@ export const ListingSearch: React.FC = () => {
           className={`${styles.placeholder} ${cardStyles.card}`}
         >
           <div className={styles.rowContainer}>
-            <div className={styles.infoIcon}>{infoIcon}</div>
+            <div className={styles.infoIcon}>
+              <FontAwesomeIcon icon={faInfoCircle} size="2x" />
+            </div>
 
             <div className={styles.textDescription}>
               Try searching with a partial match on Property Type, Address,

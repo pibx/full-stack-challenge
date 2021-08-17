@@ -6,7 +6,6 @@ import cardStyles from './Card.module.css'
 import styles from './SearchResult.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTag } from '@fortawesome/free-solid-svg-icons'
-const tag = <FontAwesomeIcon icon={faTag} />
 
 type SearchResultProps = {
   result: Listing
@@ -62,14 +61,14 @@ export const SearchResult: React.FC<SearchResultProps> = ({
       <div className={`${styles.card} ${cardStyles.card}`} style={cardStyle}>
         {result.daysOnMarket === 1 && (
           <div className={styles.newListed}>
-            <div>{tag}</div>
-            <div> &nbsp;&nbsp; Newly Listed!</div>
+            <FontAwesomeIcon icon={faTag} />
+            <span style={{ marginLeft: '0.5em' }}>Newly Listed!</span>
           </div>
         )}
 
         <div className={styles.rowContainer}>
           <div className={styles.addressContainer}>
-            <div className={styles.textTitle}>Location</div>
+            <div className={styles.columnHeader}>Location</div>
 
             <div className={styles.rowContainer}>
               <div className={styles.textBold}>Address:</div>
@@ -99,7 +98,7 @@ export const SearchResult: React.FC<SearchResultProps> = ({
 
           {/* ---------------------------------- */}
           <div className={styles.amenitiesContainer}>
-            <div className={styles.textTitle}>Listing Details</div>
+            <div className={styles.columnHeader}>Listing Details</div>
 
             <div className={styles.rowContainer}>
               <div className={styles.textBold}>HOA:</div>
@@ -123,7 +122,7 @@ export const SearchResult: React.FC<SearchResultProps> = ({
             </div>
           </div>
           <div className={styles.priceContainer}>
-            <div className={styles.textTitle}>Pricing</div>
+            <div className={styles.columnHeader}>Pricing</div>
             <div className={styles.rowContainer}>
               <div className={styles.textBold}>Current Price:</div>
               <div className={styles.text}>

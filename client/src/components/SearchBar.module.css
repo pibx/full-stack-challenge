@@ -1,51 +1,45 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto');
-
 .form {
-  border: 4px solid var(--color-primary);
+  border: 4px solid var(--color-secondary);
   border-radius: 30px;
   display: flex;
   transition: box-shadow 300ms;
+  font-size: 1.5em;
 }
 .input {
   flex: 1;
+  width: auto;
+  display: block;
   background: none;
-  border: none;
+  border: 1px solid transparent;
+  border-radius: 30px 0 0 30px;
   outline: none;
-  /* height: 3em; */
   padding: 1em;
-  font-size: 1.5em;
-  border-color: var(--color-primary);
-  color: white;
-  font-family: Roboto;
+  color: var(--color-text);
+}
+.input:focus {
+  box-shadow: none;
 }
 .input::placeholder {
-  color: #ccc;
-}
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 30px #d4f1f4 inset !important;
+  color: var(--color-text);
+  filter: brightness(0.7);
 }
 
 .form:focus-within {
-  box-shadow: 0 0 10px var(--color-primary);
+  box-shadow: 0 0 10px var(--color-secondary);
 }
 
-.input:focus-within {
-  border: none;
-}
 .button {
   background: none;
   border: none;
   outline: none;
   padding: 0 1em;
+  box-shadow: none;
 }
 
-.icon:focus,
+.button:focus .icon,
 .icon:hover {
-  -webkit-filter: drop-shadow(0 0 10px white);
-  filter: drop-shadow(0 0 10px white);
+  -webkit-filter: drop-shadow(0 0 10px var(--color-text));
+  filter: drop-shadow(0 0 10px var(--color-text));
   cursor: pointer;
 }
 .icon {
@@ -54,4 +48,8 @@ input:-webkit-autofill:active {
   outline: none;
   width: 2em;
   height: 2em;
+}
+
+.icon path {
+  fill: var(--color-text);
 }

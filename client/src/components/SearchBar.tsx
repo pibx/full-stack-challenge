@@ -7,12 +7,16 @@ import styles from './SearchBar.module.css'
 import { ReactComponent as SearchIcon } from './search_house.svg'
 
 type SearchBarProps = {
+  className?: string
   onSearch: (searchStr: string) => Promise<void>
 }
 
 const SEARCH_INPUT_NAME = 'search'
 
-export const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
+export const SearchBar: React.FC<SearchBarProps> = ({
+  className,
+  onSearch
+}) => {
   const [loading, setLoading] = React.useState(false)
   const formEl = React.useRef<HTMLFormElement | null>(null)
   const onSubmit: React.FormEventHandler<HTMLFormElement> = event => {
@@ -27,7 +31,11 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   }
 
   return (
-    <form ref={formEl} onSubmit={onSubmit} className={styles.form}>
+    <form
+      ref={formEl}
+      onSubmit={onSubmit}
+      className={`${styles.form} ${className}`}
+    >
       <input
         name={SEARCH_INPUT_NAME}
         type="text"

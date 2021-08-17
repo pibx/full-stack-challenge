@@ -2,6 +2,7 @@
   transition: transform 300ms, box-shadow 300ms;
 }
 .wrapperLink {
+  display: block;
   text-decoration: none;
 }
 .wrapperLink:active {
@@ -38,43 +39,26 @@
 
 .newListed {
   display: flex;
-  align-content: center;
+  align-items: center;
   justify-content: center;
-  color: #189ab4;
-  font-family: Roboto;
+  color: var(--color-primary);
+  font-weight: bold;
+  margin-bottom: 0.33em;
+  font-size: 1.1em;
+}
+
+.columnHeader {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  text-decoration: underline;
+  margin-bottom: 0.33em;
+  font-size: 1.2em;
 }
 
 .text {
-  margin-left: 5px;
-  font-size: 1.2em;
-  color: #05445e;
-  font-family: Roboto;
-  font-weight: lighter;
+  margin-left: 0.5em;
 }
 .textBold {
-  margin-left: 20px;
-  font-size: 1.2em;
-  color: #05445e;
-  font-family: Roboto;
-  font-weight: bolder;
-}
-
-.priceText {
-  display: flex;
-
-  margin-right: 20px;
-  font-size: 1.2em;
-  color: #05445e;
-  font-family: Roboto;
-}
-
-.textTitle {
-  display: flex;
-  justify-content: center;
-  color: #05445e;
   font-weight: bold;
-  text-decoration: underline;
-  margin-bottom: 15px;
-  font-size: 1.4em;
-  font-family: Roboto;
 }
