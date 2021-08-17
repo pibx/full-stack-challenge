@@ -4,7 +4,8 @@
   "description": "HomeFinder interview project",
   "scripts": {
     "prepare": "concurrently --names='client:install,common:install,server:install' 'cd client && npm i' 'cd common && npm i' 'cd server && npm i'",
-    "start": "cd common && npm run build && cd .. && concurrently --kill-others --names='client,server' 'cd client && npm start' 'cd server && npm start'"
+    "start": "cd common && npm run build && cd .. && concurrently --kill-others --names='client,server' 'cd client && npm start' 'cd server && npm start'",
+    "clean": "rm -rf client/node_modules && rm -rf common/node_modules && rm -rf common/.build && rm -rf server/node_modules"
   },
   "devDependencies": {
     "concurrently": "^6.2.1",
