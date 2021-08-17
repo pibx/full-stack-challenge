@@ -12,46 +12,6 @@ type SearchResultProps = {
   cardStyle?: React.CSSProperties
 }
 
-/*
-
-    t.type({
-      municipality: t.string,
-      region: t.string,
-      postalCode: t.string,
-      price: t.number,
-      beds: t.number,
-      daysOnMarket: t.number,
-      status: t.string,
-      url: t.string,
-      source: t.string,
-      favorite: t.boolean,
-      interested: t.boolean,
-      latitude: t.number,
-      longitude: t.number
-    }),
-    t.partial({
-      address: t.string,
-      /** Date string 
-      soldDate: t.number,
-      baths: t.number,
-      squareFeet: t.number,
-      lotSize: t.number,
-      pricePerSquareFoot: t.number,
-      yearBuilt: t.number,
-      hoaMonthlyFee: t.number,
-      /** Datetime string 
-      nextOpenHouseStart: t.string,
-      /** Datetime string 
-      nextOpenHouseEnd: t.string
-    })
-*/
-
-// function changeBackground(e: MouseEvent<HTMLButtonElement>) {
-//   e.preventDefault
-//   // e.target.card.background = 'red'
-//   console.log('test')
-// }
-
 export const SearchResult: React.FC<SearchResultProps> = ({
   result,
   cardStyle = {}

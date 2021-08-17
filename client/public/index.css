@@ -100,7 +100,7 @@ body > header nav ul li {
 }
 
 @media screen and (min-width: 640px) {
-  body > header h1 {
+  body > header nav ul li {
     padding: 1em 0.6em;
   }
 }
@@ -133,9 +133,8 @@ main {
 
 .logo-animated {
   max-width: 80%;
-  width: 600px;
-  height: 40%;
-  margin: 10%;
+  max-height: 80%;
+  height: 600px;
 }
 
 .logo-animated path {
@@ -146,16 +145,21 @@ main {
 
 .logo-animated .search,
 .logo-animated .house {
-  animation: drawLogoPath 2s cubic-bezier(0.33, 0.19, 0.575, 1.085) alternate
-    infinite;
+  animation: drawLogoPath 3s cubic-bezier(0.33, 0.19, 0.575, 1.085) forwards;
 }
 
 @keyframes drawLogoPath {
   from {
     stroke-dashoffset: -350;
+    fill: transparent;
+  }
+  70% {
+    stroke-dashoffset: 0;
+    fill: transparent;
   }
   to {
     stroke-dashoffset: 0;
+    fill: var(--color-text);
   }
 }
 

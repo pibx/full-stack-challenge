@@ -7,15 +7,17 @@ import styles from './SearchBar.module.css'
 import { ReactComponent as SearchIcon } from './search_house.svg'
 
 type SearchBarProps = {
-  className?: string
   onSearch: (searchStr: string) => Promise<void>
+  searchLogoRef: React.RefObject<SVGSVGElement>
+  className?: string
 }
 
 const SEARCH_INPUT_NAME = 'search'
 
 export const SearchBar: React.FC<SearchBarProps> = ({
-  className,
-  onSearch
+  onSearch,
+  searchLogoRef,
+  className
 }) => {
   const [loading, setLoading] = React.useState(false)
   const formEl = React.useRef<HTMLFormElement | null>(null)
@@ -47,7 +49,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         {loading ? (
           <FontAwesomeIcon icon={faSpinner} spin size="2x" color="white" />
         ) : (
-          <SearchIcon className={styles.icon} />
+          <SearchIcon className={styles.icon} ref={searchLogoRef} />
         )}
       </button>
     </form>
